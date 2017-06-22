@@ -17,41 +17,16 @@ import {
 
 import { isWindows, templateNameRenderer, hrefWithoutHistory } from '../../helpers'
 
-import Time from '../Time'
 import FieldHelp from '../FieldHelp/index'
 import DetailContainer from '../DetailContainer'
 import ConsoleOptions from '../ConsoleOptions/index'
 import VmDisks from '../VmDisks/index'
 import VmsListNavigation from '../VmsListNavigation/index'
 import { NextRunLabel, OptimizedForLabel } from './labels'
+import LastMessage from './LastMessage'
 
 import { canConsole, userFormatOfBytes, VmIcon, VmStatusIcon } from 'ovirt-ui-components'
 import Selectors from '../../selectors'
-
-const LastMessage = ({ vmId, userMessages }) => {
-  const vmMessages = userMessages.get('records')
-    .filter(msg => (msg.failedAction && msg.failedAction.payload && msg.failedAction.payload.vmId === vmId))
-    .sort((msg1, msg2) => (msg1.time - msg2.time))
-
-  const lastMessage = vmMessages.last()
-
-  if (!lastMessage) {
-    return null
-  }
-
-  return (
-    <span>
-      <Time time={lastMessage.time} />
-      <pre>
-        {lastMessage.message}
-      </pre>
-    </span>
-  )
-}
-LastMessage.propTypes = {
-  vmId: PropTypes.string.isRequired,
-  userMessages: PropTypes.object.isRequired,
-}
 
 const VmConsoles = ({ vm, onConsole, onRDP }) => {
   const vmConsoles = vm.get('consoles').valueSeq()
