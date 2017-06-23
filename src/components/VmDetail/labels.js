@@ -20,6 +20,7 @@ NextRunLabel.propTypes = {
   vm: PropTypes.object.isRequired,
 }
 
+/*
 export const OptimizedForLabel = ({ vm }) => {
   switch (vm.get('type')) {
     case 'server':
@@ -51,3 +52,4 @@ export const OptimizedForLabel = ({ vm }) => {
 OptimizedForLabel.propTypes = {
   vm: PropTypes.object.isRequired,
 }
+*/

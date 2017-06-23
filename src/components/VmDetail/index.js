@@ -22,7 +22,7 @@ import DetailContainer from '../DetailContainer'
 import ConsoleOptions from '../ConsoleOptions/index'
 import VmDisks from '../VmDisks/index'
 import VmsListNavigation from '../VmsListNavigation/index'
-import { NextRunLabel, OptimizedForLabel } from './labels'
+import { NextRunLabel } from './labels'
 import LastMessage from './LastMessage'
 import VmConsoles from './VmConsoles'
 
@@ -112,7 +112,6 @@ class VmDetail extends Component {
               &nbsp;{name}
             </h1>
             <NextRunLabel vm={vm} />
-            <OptimizedForLabel vm={vm} />
             <LastMessage vmId={vm.get('id')} userMessages={userMessages} />
             <div className={style['vm-detail-container']}>
               <dl className={sharedStyle['vm-properties']}>
