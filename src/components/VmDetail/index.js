@@ -29,6 +29,22 @@ import VmConsoles from './VmConsoles'
 import { userFormatOfBytes, VmIcon, VmStatusIcon } from 'ovirt-ui-components'
 import Selectors from '../../selectors'
 
+function rephraseVmType (vmType) {
+  const types = {
+    'desktop': 'desktop',
+    'server': 'server',
+    'highperformance': 'high performance',
+  }
+
+  const type = vmType.toLowerCase()
+  if (type in types) {
+    return types[type]
+  }
+
+  console.info('rephraseVmType(): vmType not explicitely defined: ', vmType)
+  return vmType
+}
+
 class VmDetail extends Component {
   constructor (props) {
     super(props)
@@ -140,6 +156,11 @@ class VmDetail extends Component {
                   <FieldHelp content='Operating system installed on the virtual machine.' text='Operating System' />
                 </dt>
                 <dd>{os ? os.get('description') : vm.getIn(['os', 'type'])}</dd>
+
+                <dt>
+                  <FieldHelp content='Type of workload the virtual machine configuration is optimized for.' text='Optimized for' />
+                </dt>
+                <dd>{rephraseVmType(vm.get('type'))}</dd>
 
                 <dt><span className='pficon pficon-memory' />&nbsp;
                   <FieldHelp content='Total memory the virtual machine will be equipped with. In megabytes.' text='Defined Memory' />
